@@ -1,0 +1,69 @@
+package org.apache.shiro.cas.spring;
+
+import org.apache.shiro.mgt.SubjectFactory;
+import org.apache.shiro.cas.spring.CasSubjectFactory;
+import org.apache.shiro.spring.web.config.AbstractShiroWebConfiguration;
+import org.springframework.beans.BeansException;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * Auto-configuration for Shiro CAS web authentication.
+ * <p>Registers CAS-specific subject factory and configuration when CAS is enabled.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
+@Configuration
+@AutoConfigureBefore( name = {
+	"org.apache.shiro.spring.config.web.autoconfigure.ShiroWebAutoConfiguration",  // shiro-spring-boot-web-starter
+	"org.apache.shiro.cas.spring.ShiroBizWebAutoConfiguration" // shiro-biz-spring-boot-starter
+})
+/**
+ * <p>Configuration properties.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
+@ConditionalOnProperty(prefix = ShiroCasProperties.PREFIX, value = "enabled", havingValue = "true")
+@EnableConfigurationProperties({ ShiroBizProperties.class })
+public class ShiroCasWebAutoConfiguration extends AbstractShiroWebConfiguration implements ApplicationContextAware  {
+
+	private ApplicationContext applicationContext;
+
+	/**
+	 * Creates the CAS subject factory.
+	 * @return the CAS subject factory
+	 */
+	@Bean
+	@Override
+    protected SubjectFactory subjectFactory() {
+        return new CasSubjectFactory();
+    }
+	
+	/**
+	 * Sets the application context.
+	 *
+	 * @param applicationContext the application context
+	 * @throws BeansException if an error occurs
+	 */
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
+	}
+
+	/**
+	 * Returns the application context.
+	 *
+	 * @return the application context
+	 */
+	public ApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
+	
+}
