@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.shiro.cas.spring.CasClientProperties;
-import org.apereo.cas.client.Protocol;
+import org.jasig.cas.client.Protocol;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import lombok.Getter;

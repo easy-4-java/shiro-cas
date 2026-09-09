@@ -3,7 +3,7 @@ package org.apache.shiro.cas.spring;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apereo.cas.client.Protocol;
+import org.jasig.cas.client.Protocol;
 
 /**
  * <p>Configuration properties for Cas Client.</p>

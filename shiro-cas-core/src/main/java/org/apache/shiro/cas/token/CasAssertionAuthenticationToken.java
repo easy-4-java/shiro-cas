@@ -21,7 +21,7 @@ import org.apache.shiro.biz.authc.token.LoginProtocolAuthenticationToken;
 import org.apache.shiro.biz.authc.token.LoginType;
 import org.apache.shiro.biz.authc.token.LoginTypeAuthenticationToken;
 import org.apache.shiro.biz.authc.token.UsernameWithoutPwdToken;
-import org.apereo.cas.client.validation.Assertion;
+import org.jasig.cas.client.validation.Assertion;
 
 /**
  * <p>Token for Cas Assertion Authentication.</p>

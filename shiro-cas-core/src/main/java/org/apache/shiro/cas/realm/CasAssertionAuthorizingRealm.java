@@ -28,11 +28,11 @@ import org.apache.shiro.cas.spring.ShiroCasProperties;
 import org.apache.shiro.cas.exception.CasTicketFoundException;
 import org.apache.shiro.cas.token.CasAssertionAuthenticationToken;
 import org.apache.shiro.cas.CasTicketValidatorUtils;
-import org.apache.shiro.util.StringUtils;
-import org.apereo.cas.client.authentication.AttributePrincipal;
-import org.apereo.cas.client.util.AssertionHolder;
-import org.apereo.cas.client.validation.Assertion;
-import org.apereo.cas.client.validation.TicketValidator;
+import org.apache.shiro.lang.util.StringUtils;
+import org.jasig.cas.client.authentication.AttributePrincipal;
+import org.jasig.cas.client.util.AssertionHolder;
+import org.jasig.cas.client.validation.Assertion;
+import org.jasig.cas.client.validation.TicketValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -20,7 +20,7 @@ import java.net.URL;
 
 
 import org.apache.shiro.cas.spring.CasClientProperties;
-import org.apereo.cas.client.util.CommonUtils;
+import org.jasig.cas.client.util.CommonUtils;
 
 /**
  * Utility class for constructing CAS-related URLs (callback, redirect, login, logout).
@@ -98,7 +98,7 @@ public class CasUrlUtils {
 		
 		String callbackUrl = CasUrlUtils.constructCallbackUrl(casProperties, contextPath, serverUrl);
 		
-		return CommonUtils.constructRedirectUrl(casRedirectUrl.toString(), casProperties.getServiceParameterName(), callbackUrl, casProperties.isRenew(), casProperties.isGateway());
+		return CommonUtils.constructRedirectUrl(casRedirectUrl.toString(), casProperties.getServiceParameterName(), callbackUrl, casProperties.isRenew(), casProperties.isGateway(), null);
 		
 	}
 	
@@ -112,7 +112,7 @@ public class CasUrlUtils {
 	 */
 	public static String constructLogoutRedirectUrl(CasClientProperties casProperties, String contextPath, String serverUrl){
 		String callbackUrl = CasUrlUtils.constructCallbackUrl(casProperties, contextPath, serverUrl);
-		return CommonUtils.constructRedirectUrl(casProperties.getCasServerLogoutUrl(), casProperties.getServiceParameterName(), callbackUrl, casProperties.isRenew(), casProperties.isGateway());
+		return CommonUtils.constructRedirectUrl(casProperties.getCasServerLogoutUrl(), casProperties.getServiceParameterName(), callbackUrl, casProperties.isRenew(), casProperties.isGateway(), null);
 	}
 	
 	/**
@@ -125,7 +125,7 @@ public class CasUrlUtils {
 	 */
 	public static String constructLoginRedirectUrl(CasClientProperties casProperties, String contextPath, String serverUrl){
 		String callbackUrl = CasUrlUtils.constructCallbackUrl(casProperties, contextPath, serverUrl);
-		return CommonUtils.constructRedirectUrl(casProperties.getCasServerLoginUrl(), casProperties.getServiceParameterName(), callbackUrl, casProperties.isRenew(), casProperties.isGateway());
+		return CommonUtils.constructRedirectUrl(casProperties.getCasServerLoginUrl(), casProperties.getServiceParameterName(), callbackUrl, casProperties.isRenew(), casProperties.isGateway(), null);
 	}
 	
 	/**

@@ -3,7 +3,8 @@ package org.apache.shiro.cas.spring;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import jakarta.servlet.ServletContext;
+import javax.servlet.Filter;
+import javax.servlet.ServletContext;
 
 import org.apache.shiro.authc.credential.AllowAllCredentialsMatcher;
 import org.apache.shiro.biz.authc.AuthenticationFailureHandler;
@@ -20,23 +21,22 @@ import org.apache.shiro.cas.filter.CasAuthenticatingFilter;
 import org.apache.shiro.cas.filter.CasLogoutFilter;
 import org.apache.shiro.cas.realm.CasAssertionAuthorizingRealm;
 import org.apache.shiro.cas.CasUrlUtils;
-import org.apache.shiro.cas.JakartaFilterAdapter;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.spring.web.config.AbstractShiroWebFilterConfiguration;
 import org.apache.shiro.web.servlet.AbstractShiroFilter;
-import org.apereo.cas.client.Protocol;
-import org.apereo.cas.client.authentication.AuthenticationFilter;
-import org.apereo.cas.client.authentication.Saml11AuthenticationFilter;
-import org.apereo.cas.client.configuration.ConfigurationKeys;
-import org.apereo.cas.client.session.SingleSignOutHttpSessionListener;
-import org.apereo.cas.client.util.AbstractCasFilter;
-import org.apereo.cas.client.util.AssertionThreadLocalFilter;
-import org.apereo.cas.client.util.HttpServletRequestWrapperFilter;
-import org.apereo.cas.client.validation.AbstractTicketValidationFilter;
-import org.apereo.cas.client.validation.Cas10TicketValidationFilter;
-import org.apereo.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter;
-import org.apereo.cas.client.validation.Cas30ProxyReceivingTicketValidationFilter;
-import org.apereo.cas.client.validation.Saml11TicketValidationFilter;
+import org.jasig.cas.client.Protocol;
+import org.jasig.cas.client.authentication.AuthenticationFilter;
+import org.jasig.cas.client.authentication.Saml11AuthenticationFilter;
+import org.jasig.cas.client.configuration.ConfigurationKeys;
+import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
+import org.jasig.cas.client.util.AbstractCasFilter;
+import org.jasig.cas.client.util.AssertionThreadLocalFilter;
+import org.jasig.cas.client.util.HttpServletRequestWrapperFilter;
+import org.jasig.cas.client.validation.AbstractTicketValidationFilter;
+import org.jasig.cas.client.validation.Cas10TicketValidationFilter;
+import org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter;
+import org.jasig.cas.client.validation.Cas30ProxyReceivingTicketValidationFilter;
+import org.jasig.cas.client.validation.Saml11TicketValidationFilter;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -259,7 +259,7 @@ public class ShiroCasWebFilterConfiguration extends AbstractShiroWebFilterConfig
 
 	/*
 	 * CAS Assertion Thread Local Filter </br>
-	 * 该过滤器使得可以通过org.apereo.cas.client.util.AssertionHolder来获取用户的登录名。
+	 * 该过滤器使得可以通过org.jasig.cas.client.util.AssertionHolder来获取用户的登录名。
 	 * 比如AssertionHolder.getAssertion().getPrincipal().getName()。
 	 * 这个类把Assertion信息放在ThreadLocal变量中，这样应用程序不在web层也能够获取到当前登录信息
 	 */
@@ -279,9 +279,9 @@ public class ShiroCasWebFilterConfiguration extends AbstractShiroWebFilterConfig
 	@Bean("casLogout")
 	@ConditionalOnMissingBean(name = "casLogout")
 	@SuppressWarnings("unchecked")
-	public FilterRegistrationBean<jakarta.servlet.Filter> casLogoutFilter(List<LogoutListener> logoutListeners){
+	public FilterRegistrationBean<Filter> casLogoutFilter(List<LogoutListener> logoutListeners){
 
-		FilterRegistrationBean<jakarta.servlet.Filter> registration = new FilterRegistrationBean<>();
+		FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<>();
 		CasLogoutFilter logoutFilter = new CasLogoutFilter();
 
 		// 登录注销后的重定向地址：直接进入登录页面
@@ -291,7 +291,7 @@ public class ShiroCasWebFilterConfiguration extends AbstractShiroWebFilterConfig
 			logoutFilter.setRedirectUrl(bizProperties.getLoginUrl());
 		}
 		// Wrap javax.servlet.Filter to jakarta.servlet.Filter
-		registration.setFilter(new JakartaFilterAdapter(logoutFilter));
+		registration.setFilter(logoutFilter);
 		//注销监听：实现该接口可监听账号注销失败和成功的状态，从而做业务系统自己的事情，比如记录日志
 		logoutFilter.setLogoutListeners(logoutListeners);
 
@@ -311,12 +311,12 @@ public class ShiroCasWebFilterConfiguration extends AbstractShiroWebFilterConfig
 	@Bean("cas")
 	@ConditionalOnMissingBean(name = "cas")
 	@SuppressWarnings("unchecked")
-	public FilterRegistrationBean<jakarta.servlet.Filter> casFilter(
+	public FilterRegistrationBean<Filter> casFilter(
 			ObjectProvider<LoginListener> loginListenerProvider,
 			ObjectProvider<AuthenticationSuccessHandler> successHandlerProvider,
 			ObjectProvider<AuthenticationFailureHandler> failureHandlerProvider,
 			ShiroCasProperties properties){
-		FilterRegistrationBean<jakarta.servlet.Filter> registration = new FilterRegistrationBean<>();
+		FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<>();
 		CasAuthenticatingFilter casSsoFilter = new CasAuthenticatingFilter();
 		// 监听器
 		casSsoFilter.setLoginListeners(loginListenerProvider.stream().collect(Collectors.toList()));
@@ -325,7 +325,7 @@ public class ShiroCasWebFilterConfiguration extends AbstractShiroWebFilterConfig
 		casSsoFilter.setFailureUrl(bizProperties.getFailureUrl());
 		casSsoFilter.setSuccessUrl(bizProperties.getSuccessUrl());
 		// Wrap javax.servlet.Filter to jakarta.servlet.Filter
-		registration.setFilter(new JakartaFilterAdapter(casSsoFilter));
+		registration.setFilter(casSsoFilter);
 	    registration.setEnabled(false);
 	    return registration;
 	}
@@ -397,11 +397,11 @@ public class ShiroCasWebFilterConfiguration extends AbstractShiroWebFilterConfig
 	@Bean(name = "filterShiroFilterRegistrationBean")
 	@ConditionalOnMissingBean
 	@SuppressWarnings("unchecked")
-	protected FilterRegistrationBean<jakarta.servlet.Filter> filterShiroFilterRegistrationBean() throws Exception {
+	protected FilterRegistrationBean<Filter> filterShiroFilterRegistrationBean() throws Exception {
 
-		FilterRegistrationBean<jakarta.servlet.Filter> filterRegistrationBean = new FilterRegistrationBean<>();
+		FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
 		// Wrap javax.servlet.Filter (AbstractShiroFilter) to jakarta.servlet.Filter
-		filterRegistrationBean.setFilter(new JakartaFilterAdapter((AbstractShiroFilter) shiroFilterFactoryBean().getObject()));
+		filterRegistrationBean.setFilter((AbstractShiroFilter) shiroFilterFactoryBean().getObject());
 		filterRegistrationBean.setOrder(Integer.MAX_VALUE);
 
 		return filterRegistrationBean;
