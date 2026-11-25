@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-18",
+  "scope": "17 feature/3.0.x repositories: production source references and declared dependencies; effective CAS POM; four touched worktree whitespace checks",
+  "production_java_files": 373,
+  "pom_files": 48,
+  "effective_jackson_versions": {
+    "com.fasterxml.jackson.core:jackson-annotations": "2.22",
+    "tools.jackson.core:jackson-core": "3.2.1",
+    "tools.jackson.core:jackson-databind": "3.2.1",
+    "com.fasterxml.jackson.core:jackson-core": "2.22.3",
+    "com.fasterxml.jackson.core:jackson-databind": "2.22.3"
+  },
+  "cas_sdk_jackson2_exception": true,
+  "full_cas_dependency_tree_verified": false,
+  "full_test_suite_passed": false,
+  "errors": []
+}

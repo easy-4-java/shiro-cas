@@ -1,0 +1,16 @@
+io.github.easy4j:cas-jackson-consumer-verification:pom:3.0.x.20260630-SNAPSHOT
++- org.apereo.cas.client:cas-client-core:jar:4.0.4:compile
+|  +- com.nimbusds:nimbus-jose-jwt:jar:9.37.3:compile
+|  |  \- com.github.stephenc.jcip:jcip-annotations:jar:1.0-1:compile
+|  +- com.fasterxml.jackson.core:jackson-databind:jar:2.22.3:compile (version managed from 2.16.1)
+|  |  +- (com.fasterxml.jackson.core:jackson-annotations:jar:2.22:compile - version managed from 2.22; omitted for duplicate)
+|  |  \- com.fasterxml.jackson.core:jackson-core:jar:2.22.3:compile (version managed from 2.22.3)
+|  +- org.slf4j:slf4j-api:jar:2.0.18:compile (version managed from 2.0.11)
+|  +- commons-codec:commons-codec:jar:1.16.0:compile
+|  \- org.bouncycastle:bcpkix-jdk15on:jar:1.70:compile
+|     +- org.bouncycastle:bcprov-jdk15on:jar:1.70:compile
+|     \- org.bouncycastle:bcutil-jdk15on:jar:1.70:compile
+|        \- (org.bouncycastle:bcprov-jdk15on:jar:1.70:compile - omitted for duplicate)
+\- tools.jackson.core:jackson-databind:jar:3.2.1:compile
+   +- com.fasterxml.jackson.core:jackson-annotations:jar:2.22:compile (version managed from 2.22)
+   \- tools.jackson.core:jackson-core:jar:3.2.1:compile (version managed from 3.2.1)

@@ -1,0 +1,53 @@
+注: /Users/wandl/workspaces/workspace-github-easy-4-java/shiro-cas/shiro-cas-core/src/main/java/org/apache/shiro/cas/CasUrlUtils.java使用或覆盖了已过时的 API。
+注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+
+
+Test run finished after 65 ms
+[         3 containers found      ]
+[         0 containers skipped    ]
+[         3 containers started    ]
+[         0 containers aborted    ]
+[         3 containers successful ]
+[         0 containers failed     ]
+[         5 tests found           ]
+[         0 tests skipped         ]
+[         5 tests started         ]
+[         0 tests aborted         ]
+[         3 tests successful      ]
+[         2 tests failed          ]
+
+
+Failures (2):
+  JUnit Jupiter:CasJacksonCoexistenceTest:rejectedCasTicketRemainsRejectedWithJackson3OnClasspath()
+    MethodSource [className = 'org.apache.shiro.cas.CasJacksonCoexistenceTest', methodName = 'rejectedCasTicketRemainsRejectedWithJackson3OnClasspath', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <org.apereo.cas.client.validation.TicketValidationException> but was: <java.lang.NoClassDefFoundError>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       org.apache.shiro.cas.CasJacksonCoexistenceTest.rejectedCasTicketRemainsRejectedWithJackson3OnClasspath(CasJacksonCoexistenceTest.java:40)
+       [...]
+     Caused by: java.lang.NoClassDefFoundError: com/fasterxml/jackson/core/JsonProcessingException
+       org.apache.shiro.cas.CasJacksonCoexistenceTest.lambda$rejectedCasTicketRemainsRejectedWithJackson3OnClasspath$0(CasJacksonCoexistenceTest.java:41)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+       [...]
+     Caused by: java.lang.ClassNotFoundException: com.fasterxml.jackson.core.JsonProcessingException
+       java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+       java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+       java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+       [...]
+  JUnit Jupiter:CasJacksonCoexistenceTest:validatedCasIdentityCanBeWrittenAndReadWithJackson3()
+    MethodSource [className = 'org.apache.shiro.cas.CasJacksonCoexistenceTest', methodName = 'validatedCasIdentityCanBeWrittenAndReadWithJackson3', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: com/fasterxml/jackson/core/JsonProcessingException
+       org.apache.shiro.cas.CasJacksonCoexistenceTest.validatedCasIdentityCanBeWrittenAndReadWithJackson3(CasJacksonCoexistenceTest.java:22)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+     Caused by: java.lang.ClassNotFoundException: com.fasterxml.jackson.core.JsonProcessingException
+       java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+       java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+       java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+       [...]
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
