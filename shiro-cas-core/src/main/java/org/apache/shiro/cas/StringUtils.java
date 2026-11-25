@@ -21,7 +21,7 @@ package org.apache.shiro.cas;
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
-public class StringUtils extends org.apache.shiro.util.StringUtils{
+public class StringUtils {
 
 	/**
 	 * Any number of these characters are considered delimiters between multiple
@@ -39,4 +39,9 @@ public class StringUtils extends org.apache.shiro.util.StringUtils{
 		return tokenizeToStringArray(str, CONFIG_LOCATION_DELIMITERS);
 	}
 	
+	/** Tokenizes configuration using the supplied delimiters. */
+	public static String[] tokenizeToStringArray(String str, String delimiters) {
+		return org.apache.shiro.lang.util.StringUtils.tokenizeToStringArray(str, delimiters);
+	}
+
 }

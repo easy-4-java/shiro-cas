@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.servlet.Filter;
+import jakarta.servlet.Filter;
 
 import org.apache.shiro.biz.spring.ShiroFilterProxyFactoryBean;
 import org.apache.shiro.web.filter.AccessControlFilter;
@@ -90,7 +90,7 @@ public class ShiroCasFilterFactoryBean extends ShiroFilterProxyFactoryBean imple
 		if (delegate instanceof Filter) {
 			return (Filter) delegate;
 		}
-		// Handle JakartaFilterAdapter wrapping javax.servlet.Filter
+		// Handle JakartaFilterAdapter wrapping jakarta.servlet.Filter
 		try {
 			java.lang.reflect.Method getDelegate = delegate.getClass().getMethod("getDelegate");
 			Object inner = getDelegate.invoke(delegate);

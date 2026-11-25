@@ -25,6 +25,7 @@ import javax.net.ssl.HttpsURLConnection;
 import org.apache.shiro.cas.spring.ShiroCasProperties;
 import org.apache.shiro.cas.exception.CasAuthenticationException;
 import org.apereo.cas.client.Protocol;
+import org.springframework.util.StringUtils;
 import org.apereo.cas.client.proxy.Cas20ProxyRetriever;
 import org.apereo.cas.client.proxy.ProxyGrantingTicketStorage;
 import org.apereo.cas.client.proxy.ProxyGrantingTicketStorageImpl;
