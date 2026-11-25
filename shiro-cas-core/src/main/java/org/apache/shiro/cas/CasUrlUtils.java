@@ -20,7 +20,8 @@ import java.net.URL;
 
 
 import org.apache.shiro.cas.spring.CasClientProperties;
-import org.jasig.cas.client.util.CommonUtils;
+import org.apereo.cas.client.util.CommonUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Utility class for constructing CAS-related URLs (callback, redirect, login, logout).
@@ -38,7 +39,7 @@ public class CasUrlUtils {
 	 * @return the result
 	 */
 	public static String constructCallbackUrl(String contextPath, String serverUrl) {
-		contextPath = StringUtils.hasText(contextPath) ? contextPath : "/";
+		contextPath = StringUtils.isNotBlank(contextPath) ? contextPath : "/";
 		if (contextPath.endsWith("/")) {
 			contextPath = contextPath.substring(0, contextPath.length() - 1);
 		}
@@ -56,7 +57,7 @@ public class CasUrlUtils {
 	 */
 	public static String constructCallbackUrl(CasClientProperties casProperties, String contextPath, String serverUrl) {
 
-		contextPath = StringUtils.hasText(contextPath) ? contextPath : "/";
+		contextPath = StringUtils.isNotBlank(contextPath) ? contextPath : "/";
 		if (contextPath.endsWith("/")) {
 			contextPath = contextPath.substring(0, contextPath.length() - 1);
 		}
@@ -136,14 +137,14 @@ public class CasUrlUtils {
 	 * @param casProperties the cas properties
 	 * @return the result
 	 */
-	public static String constructServiceUrl(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response, CasClientProperties casProperties) {
+	public static String constructServiceUrl(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, CasClientProperties casProperties) {
 
 		String serviceUrl = casProperties.getServerName();
-		if (serviceUrl == null || serviceUrl.isEmpty()) {
+		if (StringUtils.isEmpty(serviceUrl)) {
 			serviceUrl = request.getRequestURL().toString();
 		}
 		String artifactParameter = casProperties.getArtifactParameterName();
-		if (artifactParameter != null && !artifactParameter.isEmpty()) {
+		if (StringUtils.isNotEmpty(artifactParameter)) {
 			int ticketIndex = serviceUrl.indexOf("?ticket=");
 			if (ticketIndex == -1) {
 				ticketIndex = serviceUrl.indexOf("&ticket=");
