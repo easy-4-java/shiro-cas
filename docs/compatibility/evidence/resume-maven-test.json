@@ -1,0 +1,31 @@
+{
+  "repo": "shiro-cas",
+  "line": 2,
+  "exit": 1,
+  "seconds": 3.7,
+  "errors": [
+    "[ERROR] Failed to execute goal on project shiro-cas-core: Could not resolve dependencies for project io.github.easy4j:shiro-cas-core:jar:2.0.x.20260630-SNAPSHOT",
+    "[ERROR] dependency: org.apereo.cas.client:cas-client-support-saml:jar:4.0.4 (compile)",
+    "[ERROR] \tCannot access central (https://repo.maven.apache.org/maven2) in offline mode and the artifact org.apereo.cas.client:cas-client-support-saml:jar:4.0.4 has not been downloaded from it before.",
+    "[ERROR] dependency: org.apache.commons:commons-collections4:jar:4.5.0-M2 (compile)",
+    "[ERROR] \tCannot access central (https://repo.maven.apache.org/maven2) in offline mode and the artifact org.apache.commons:commons-collections4:jar:4.5.0-M2 has not been downloaded from it before.",
+    "[ERROR] dependency: io.github.easy4j:shiro-extension-spring:jar:2.0.x.20260630-SNAPSHOT (compile)",
+    "[ERROR] \tCould not find artifact io.github.easy4j:shiro-extension-spring:jar:2.0.x.20260630-SNAPSHOT",
+    "[ERROR] dependency: org.owasp.encoder:encoder:jar:1.6.0 (compile)",
+    "[ERROR] \tCannot access central (https://repo.maven.apache.org/maven2) in offline mode and the artifact org.owasp.encoder:encoder:jar:1.6.0 has not been downloaded from it before.",
+    "[ERROR] -> [Help 1]",
+    "[ERROR] ",
+    "[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch."
+  ],
+  "command": [
+    "/opt/homebrew/bin/mvn",
+    "-s",
+    "/tmp/shiro-302-settings.xml",
+    "-Dmaven.repo.local=/tmp/shiro-302-m2",
+    "-o",
+    "-B",
+    "-ntp",
+    "test"
+  ],
+  "jdk": "/Users/wandl/Library/Java/JavaVirtualMachines/corretto-17.0.21/Contents/Home"
+}
